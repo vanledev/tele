@@ -1,11 +1,15 @@
 import { Api, TelegramClient } from "telegram";
 import { StringSession } from "telegram/sessions/index.js";
 
+function createClient(){
 const apiId = 24364635;
 const apiHash = "c18b26fb82ec79ee298769959ab0ac92";
 const session = new StringSession(
   "1BQANOTEuMTA4LjU2LjE1MgG7FoltiNlmPxpy5v+Cao4gEhSxpcvWiVPPlQzCdA4iLRNjGZD5XbTL2sDH5AlDR53TpxqaNFGrLWTMt0aYyJOKLCLwpG5JIckbaL3CPy9OrIGjqaPLeOZVvJuKtWkdXqCOF+gtjwfIifByHVWg59UuBgbi/Kmxs60tJCgDbDRNmujW6X2odLUslzOgWuCTWaeskhcBzz7E1x2hOG2uvu/Unl3H/MmeLF76/UIYwfNf4kTj73sJ3yBFUpiJfDADNEsh/1MVulc8ULRuOuR3WCrCEE/WEnUfIBIPdbU3MxtpbPQrGNJSPGD3/yR4QMRbstE6VOW35yvb4/ASyT4oDn35Qw=="
 ); // fill this later with the value from session.save()
+  const client = new TelegramClient(session, apiId, apiHash, {});
+  return client;
+}
 
 // (async () => {
 //   console.log("Loading interactive example...");
@@ -24,9 +28,10 @@ const session = new StringSession(
 //   await client.sendMessage("me", { message: "Hello!" });
 // })();
 
-const client = new TelegramClient(session, apiId, apiHash, {});
+
 
 async function getMembers(groupID) {
+  const client= createClient()
   await client.connect(); // This assumes you have already authenticated with .start()
   let users = [];
   let offset = 0;
